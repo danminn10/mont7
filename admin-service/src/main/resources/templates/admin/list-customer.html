@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/layout}">
+<head>
+  <meta charset="UTF-8">
+  <title layout:title-content="Danh sách khách hàng">Danh sách khách hàng</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+          },
+        }
+      }
+    }
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+</head>
+
+<div layout:fragment="content">
+  <div class="max-w-7xl mx-auto px-4 py-10">
+    <div class="bg-white rounded-2xl shadow-lg p-8">
+      <!-- Header -->
+      <div class="flex items-center justify-between mb-8">
+        <div class="flex items-center gap-2">
+          <i class="fa-solid fa-users text-blue-500 text-xl"></i>
+          <h1 class="text-3xl font-semibold tracking-tight">Danh sách khách hàng</h1>
+        </div>
+        <a th:href="@{/customers/customer-form-insert}"
+           class="flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium px-5 py-2.5 rounded-xl shadow transition">
+          <i class="fa-solid fa-plus"></i> Thêm khách hàng
+        </a>
+      </div>
+
+      <!-- Form Tìm Kiếm -->
+      <form th:action="@{/customers/list-customer}" method="get" class="mb-6 flex gap-2">
+        <input
+                type="text"
+                name="keyword"
+                placeholder="Nhập từ khóa tìm kiếm..."
+                class="border border-gray-300 rounded-lg p-2 flex-1"
+                th:value="${keyword}" />
+        <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white px-5 py-2.5 rounded-lg shadow transition">
+          Tìm kiếm
+        </button>
+      </form>
+
+      <!-- Table -->
+      <div class="overflow-auto rounded-xl border border-gray-200">
+        <table class="min-w-full text-sm text-left">
+          <thead class="bg-gray-100 sticky top-0 z-10">
+          <tr class="text-gray-600 text-sm uppercase">
+            <th class="px-6 py-3">Stt</th>
+            <th class="px-6 py-3">Tên công ty</th>
+            <th class="px-6 py-3">Địa chỉ</th>
+            <th class="px-6 py-3">Thành phố</th>
+            <th class="px-6 py-3">Quốc gia</th>
+            <th class="px-6 py-3">Mã bưu điện</th>
+            <th class="px-6 py-3">Năm sinh</th>
+            <th class="px-6 py-3">Khu vực</th>
+            <th class="px-6 py-3 text-center">Sửa</th>
+            <th class="px-6 py-3 text-center">Xóa</th>
+          </tr>
+          </thead>
+          <tbody class="divide-y divide-gray-200 bg-white">
+          <tr th:each="customer : ${customers}" class="hover:bg-gray-50 transition">
+            <td class="px-6 py-4" th:text="${customer.id}"></td>
+            <td class="px-6 py-4" th:text="${customer.companyName}"></td>
+            <td class="px-6 py-4" th:text="${customer.address}"></td>
+            <td class="px-6 py-4" th:text="${customer.city}"></td>
+            <td class="px-6 py-4" th:text="${customer.country}"></td>
+            <td class="px-6 py-4" th:text="${customer.postalCode}"></td>
+            <td class="px-6 py-4" th:text="${customer.namSinh}"></td>
+            <td class="px-6 py-4" th:text="${customer.region}"></td>
+            <td class="px-6 py-4 text-center">
+              <a th:href="@{/customers/customer-form-update(id=${customer.id})}" title="Sửa"
+                 class="text-blue-600 hover:text-blue-800 transition">
+                <i class="fa-solid fa-pen-to-square"></i>
+              </a>
+            </td>
+            <td class="px-6 py-4 text-center">
+              <a th:href="@{/customers/delete(id=${customer.id})}"
+                 onclick="return confirm('Bạn có chắc muốn xóa khách hàng này không?')"
+                 class="text-red-600 hover:text-red-800 transition" title="Xóa">
+                <i class="fa-solid fa-trash-can"></i>
+              </a>
+            </td>
+          </tr>
+          <tr th:if="${#lists.isEmpty(customers)}">
+            <td colspan="10" class="text-center text-gray-500 italic py-6">Không có khách hàng nào.</td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+</html>

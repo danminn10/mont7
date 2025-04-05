@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/layout}">
+<head>
+    <meta charset="UTF-8">
+    <title layout:title-content="Danh sách sản phẩm">Danh sách sản phẩm</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+</head>
+
+<div layout:fragment="content" class="p-6">
+    <div class="max-w-7xl mx-auto">
+        <div class="bg-white shadow-lg rounded-xl p-6">
+            <div class="flex items-center justify-between mb-6">
+                <h1 class="text-2xl font-bold text-indigo-600">
+                    <i class="fa-solid fa-boxes-stacked mr-2"></i> Danh sách sản phẩm
+                </h1>
+                <a th:href="@{/products/product-form-insert}">
+                    <button class="bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-lg shadow-md transition">
+                        <i class="fa-solid fa-plus mr-2"></i> Thêm sản phẩm mới
+                    </button>
+                </a>
+            </div>
+
+            <!-- FORM TÌM KIẾM -->
+            <div class="mb-4">
+                <form th:action="@{/products/list-product}" method="get" class="flex gap-2">
+                    <input
+                            type="text"
+                            name="keyword"
+                            class="border border-gray-300 rounded px-2 py-1"
+                            placeholder="Nhập từ khóa tìm kiếm..."
+                            th:value="${keyword}" />
+                    <button type="submit" class="bg-indigo-600 text-white px-3 py-1 rounded">
+                        Tìm kiếm
+                    </button>
+                </form>
+            </div>
+            <!-- /FORM TÌM KIẾM -->
+
+            <div class="overflow-x-auto">
+                <table class="min-w-full divide-y divide-gray-200">
+                    <thead class="bg-indigo-50 text-indigo-800">
+                    <tr>
+                        <th class="px-4 py-3 text-left text-sm font-semibold">Stt</th>
+                        <th class="px-4 py-3 text-left text-sm font-semibold">Tên</th>
+                        <th class="px-4 py-3 text-left text-sm font-semibold">Mô tả</th>
+                        <th class="px-4 py-3 text-left text-sm font-semibold">Giá</th>
+                        <th class="px-4 py-3 text-left text-sm font-semibold">Hình ảnh</th>
+                        <th class="px-4 py-3 text-center text-sm font-semibold">Sửa</th>
+                        <th class="px-4 py-3 text-center text-sm font-semibold">Xóa</th>
+                    </tr>
+                    </thead>
+                    <tbody class="divide-y divide-gray-100 bg-white">
+                    <tr th:each="product : ${products}" class="hover:bg-gray-50 transition">
+                        <td class="px-4 py-2 text-sm text-gray-700" th:text="${product.id}"></td>
+                        <td class="px-4 py-2 text-sm text-gray-700" th:text="${product.name}"></td>
+                        <td class="px-4 py-2 text-sm text-gray-600" th:text="${product.description}"></td>
+                        <td class="px-4 py-2 text-sm text-green-600 font-semibold"
+                            th:text="${#numbers.formatDecimal(product.price, 0, 'COMMA', 0, 'POINT') + ' ₫'}"></td>
+                        <td class="px-4 py-2">
+                            <img th:if="${product.imageUrl}" th:src="${product.imageUrl}" alt="Ảnh" class="w-14 h-14 object-cover rounded-md border">
+                            <span th:unless="${product.imageUrl}" class="text-sm italic text-gray-400">Không có ảnh</span>
+                        </td>
+                        <td class="px-4 py-2 text-center">
+                            <a th:href="@{/products/product-form-update(id=${product.id})}" class="text-indigo-600 hover:text-indigo-800">
+                                <i class="fa-solid fa-pen-to-square text-lg"></i>
+                            </a>
+                        </td>
+                        <td class="px-4 py-2 text-center">
+                            <a th:href="@{/products/delete(id=${product.id})}"
+                               onclick="return confirm('Bạn có chắc chắn muốn xóa sản phẩm này không?');"
+                               class="text-red-500 hover:text-red-700">
+                                <i class="fa-solid fa-trash text-lg"></i>
+                            </a>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Optional: Pagination -->
+            <div class="mt-6 flex justify-end">
+                <!-- <div class="text-sm text-gray-500">Trang 1/5</div> -->
+            </div>
+        </div>
+    </div>
+</div>
+</html>

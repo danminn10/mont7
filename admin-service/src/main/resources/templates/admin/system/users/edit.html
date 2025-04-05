@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/layout}">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Sửa người dùng</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Tailwind -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Flowbite + Alpine.js -->
+  <script src="https://unpkg.com/flowbite@1.6.5/dist/flowbite.min.js"></script>
+  <script src="https://unpkg.com/alpinejs" defer></script>
+
+  <!-- Dark mode toggle config -->
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+    }
+  </script>
+
+  <style>
+    .fade-in {
+      animation: fadeIn 0.5s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+  </style>
+</head>
+
+<div layout:fragment="content" class="bg-gray-100 dark:bg-gray-900 min-h-screen flex items-center justify-center px-4" x-data="{ showToast: false }">
+  <div class="w-full max-w-md bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-8 fade-in">
+    <!-- Header + Dark mode toggle -->
+    <div class="flex justify-between items-center mb-6">
+      <h2 class="text-2xl font-bold text-blue-600 dark:text-blue-400">Sửa Người Dùng</h2>
+      <button onclick="document.documentElement.classList.toggle('dark')" class="text-sm text-gray-500 dark:text-gray-300 hover:underline">
+        🌗 Đổi nền
+      </button>
+    </div>
+
+    <!-- Form -->
+    <form th:action="@{/system/users/update}" method="post" th:object="${user}" @submit="showToast = true" class="space-y-5">
+      <input type="hidden" th:field="*{id}">
+
+      <!-- Username -->
+      <div>
+        <label for="username" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Tên đăng nhập</label>
+        <input type="text" th:field="*{username}" id="username"
+               class="w-full mt-1 px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 focus:outline-none">
+        <p class="text-red-500 text-sm mt-1" th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></p>
+      </div>
+
+      <!-- Trạng thái -->
+      <div>
+        <label for="enabled" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Trạng thái</label>
+        <select th:field="*{enabled}" id="enabled"
+                class="w-full mt-1 px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 focus:outline-none">
+          <option value="true">Kích hoạt</option>
+          <option value="false">Chưa kích hoạt</option>
+        </select>
+      </div>
+
+      <!-- Chọn quyền -->
+        <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Quyền</label>
+        <div class="space-y-2">
+          <div th:each="authority, iterStat : ${authorities}">
+            <div class="flex items-center space-x-2">
+              <input type="checkbox"
+                     name="authorities"
+                     th:value="${authority.id}"
+                     th:checked="${user.authorities != null and user.authorities.contains(authority)}"
+                     th:id="'auth-' + ${authority.id}"
+                     class="form-checkbox text-blue-600 dark:bg-gray-700" />
+              <label th:for="'auth-' + ${authority.id}" th:text="${authority.name}" class="text-gray-800 dark:text-gray-200"></label>
+            </div>
+          </div>
+
+      </div>
+
+      <!-- Password -->
+      <div>
+        <label for="password" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Mật khẩu</label>
+        <input type="password" th:field="*{password}" id="password"
+               class="w-full mt-1 px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 focus:outline-none">
+        <p class="text-red-500 text-sm mt-1" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></p>
+      </div>
+
+      <!-- Buttons -->
+      <div class="flex justify-between items-center pt-4">
+        <button type="submit"
+                class="bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-6 rounded-md transition duration-200">
+          Cập Nhật
+        </button>
+        <a th:href="@{/system/users/list}" class="text-sm text-gray-500 dark:text-gray-300 hover:underline">
+          Quay lại
+        </a>
+      </div>
+    </form>
+  </div>
+
+
+  <!-- Toast -->
+  <div x-show="showToast" x-transition x-init="setTimeout(() => showToast = false, 3000)"
+       class="fixed bottom-6 right-6 bg-green-500 text-white px-4 py-3 rounded-lg shadow-lg text-sm flex items-center space-x-2">
+    <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/>
+    </svg>
+    <span>Cập nhật thành công!</span>
+  </div>
+</div>

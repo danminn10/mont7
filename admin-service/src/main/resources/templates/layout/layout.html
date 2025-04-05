@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title th:text="${title} ?: 'Admin Dashboard'">Admin Dashboard</title>
+
+  <!-- Tailwind CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body class="bg-gray-100 text-gray-800 transition-colors duration-300">
+
+<!-- Wrapper -->
+<div class="flex min-h-screen">
+  <!-- Sidebar -->
+  <aside class="w-64 bg-white shadow-md hidden md:block">
+    <div class="p-6 border-b border-gray-200 text-lg font-bold">
+      Admin Panel
+    </div>
+    <nav class="mt-4 flex flex-col">
+      <a th:href="@{/admin}" class="px-6 py-3 hover:bg-gray-100 transition-colors duration-200 flex items-center gap-2">
+        <i class="fas fa-gauge"></i> Dashboard
+      </a>
+      <a th:href="@{/customers/list-customer}" class="px-6 py-3 hover:bg-gray-100 transition-colors duration-200 flex items-center gap-2">
+        <i class="fas fa-users"></i> Khách hàng
+      </a>
+      <a th:href="@{/products/list-product}" class="px-6 py-3 hover:bg-gray-100 transition-colors duration-200 flex items-center gap-2">
+        <i class="fas fa-box-open"></i> Sản phẩm
+      </a>
+      <a th:href="@{/system/users/list}" class="px-6 py-3 hover:bg-gray-100 transition-colors duration-200 flex items-center gap-2">
+        <i class="fas fa-user-cog"></i> Người dùng
+      </a>
+      <a th:href="@{/system/authorities/list}" class="px-6 py-3 hover:bg-gray-100 transition-colors duration-200 flex items-center gap-2">
+        <i class="fas fa-key"></i> Quyền hạn
+      </a>
+      <a th:href="@{/admin/test/list}" class="px-6 py-3 hover:bg-gray-100 transition-colors duration-200 flex items-center gap-2">
+        <i class="fas fa-flask"></i> Test
+      </a>
+
+    </nav>
+  </aside>
+
+  <!-- Content -->
+  <div class="flex-1 flex flex-col">
+    <!-- Navbar -->
+    <header class="bg-white border-b border-gray-200 px-4 py-3 flex justify-between items-center transition-colors duration-300">
+      <div class="md:hidden">
+        <button id="menuToggle" class="text-2xl">
+          <i class="fas fa-bars"></i>
+        </button>
+      </div>
+      <div class="flex items-center gap-4">
+        <div class="relative">
+          <button id="userMenuButton" class="text-xl">
+            <i class="fas fa-user-circle"></i>
+          </button>
+          <div id="userMenu" class="hidden absolute right-0 mt-2 w-40 bg-white text-gray-800 shadow-lg rounded-md z-50 overflow-hidden">
+            <a href="#" class="block px-4 py-2 hover:bg-gray-100">Thông tin cá nhân</a>
+            <hr class="border-gray-200">
+            <a th:href="@{/logout}" class="block px-4 py-2 text-red-600 hover:bg-gray-100">
+              <i class="fas fa-sign-out-alt me-1"></i> Đăng xuất
+            </a>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Main Content Area (Thymeleaf fragment) -->
+    <main class="p-6">
+      <section layout:fragment="content">
+        <p class="text-gray-500 italic">Loading...</p>
+      </section>
+    </main>
+  </div>
+</div>
+
+<!-- Script -->
+<script>
+  const userMenuBtn = document.getElementById('userMenuButton');
+  const userMenu = document.getElementById('userMenu');
+  const sidebar = document.querySelector('aside');
+  const menuToggle = document.getElementById('menuToggle');
+
+  userMenuBtn?.addEventListener('click', () => {
+    userMenu?.classList.toggle('hidden');
+  });
+
+  menuToggle?.addEventListener('click', () => {
+    sidebar?.classList.toggle('hidden');
+  });
+</script>
+</body>
+</html>

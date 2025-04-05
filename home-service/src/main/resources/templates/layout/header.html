@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/layout}">
+        <header th:class="${theme == 'summer'} ? 'bg-white shadow-sm' : 'container mx-auto px-6 py-6 flex justify-between items-center'" th:fragment="header(theme)">
+            <div class="flex items-center space-x-2">
+                <div th:class="${theme == 'summer'} ? 
+                    'w-10 h-10 summer-badge rounded-full flex items-center justify-center text-white font-bold text-xl' : 
+                    'w-10 h-10 bg-primary rounded-full flex items-center justify-center text-white font-bold text-xl'">R</div>
+                <span th:class="${theme == 'summer'} ? 
+                    'text-2xl font-display text-summer-gradient font-bold' : 
+                    'text-2xl font-display text-gradient font-bold'">RETRIP</span>
+            </div>
+            
+            <nav class="hidden md:flex space-x-8">
+                <a href="/" th:class="${theme == 'summer'} ? 
+                    'text-dark hover:text-summer-blue transition' : 
+                    'text-dark hover:text-primary transition'">Trang chủ</a>
+                <a th:href="@{/products}" th:class="${theme == 'summer'} ? 
+                    'text-summer-blue font-medium' : 
+                    'text-dark hover:text-primary transition'">Tour du lịch</a>
+                <a th:href="@{/about}" th:class="${theme == 'summer'} ? 
+                'text-dark hover:text-summer-blue transition' : 
+                'text-dark hover:text-primary transition'">Giới thiệu</a>
+                <a th:href="@{/contact}" th:class="${theme == 'summer'} ? 
+                'text-dark hover:text-summer-blue transition' : 
+                'text-dark hover:text-primary transition'">Liên hệ</a>
+                <a th:href="@{/privacy}" th:class="${theme == 'summer'} ? 
+                'text-dark hover:text-summer-blue transition' : 
+                'text-dark hover:text-primary transition'">Chính sách</a>
+                
+
+                <th:block th:if="${theme == 'summer'}">
+                    <a href="https://intertour.vn/bien-dao/">Biển đảo</a>
+                    <a href="https://mytour.vn/vi/blog/du-lich" class="text-dark hover:text-summer-blue transition">Khám phá</a>
+                </th:block>
+            </nav>
+            
+            <div class="flex items-center space-x-4">
+                <button class="p-2 rounded-full bg-white shadow-md hover:shadow-lg transition">
+                    <i class="fas fa-user text-dark"></i>
+                </button>
+                <button th:if="${theme != 'summer'}" class="md:hidden p-2 rounded-full bg-white shadow-md hover:shadow-lg transition">
+                    <i class="fas fa-bars text-dark"></i>
+                </button>
+            </div>
+        </header>
+        
+        <th:block th:if="${theme == 'summer'}">
+            <!-- Hero Banner for Summer Theme -->
+            <div class="bg-gradient-to-r from-summer-blue to-summer-green py-12 text-white">
+                <div class="container mx-auto px-6 text-center">
+                    <h1 class="text-4xl md:text-5xl font-bold mb-4">MÙA HÈ RỰC RỠ</h1>
+                    <p class="text-xl max-w-2xl mx-auto">Khám phá những điểm đến tuyệt vời nhất mùa hè này với ưu đãi đặc biệt</p>
+                </div>
+            </div>
+        </th:block>
+</html>

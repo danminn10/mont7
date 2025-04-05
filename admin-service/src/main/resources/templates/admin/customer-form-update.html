@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/layout}">
+<head>
+    <meta charset="UTF-8">
+    <title>Cập nhật khách hàng</title>
+    <!-- Tailwind CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Heroicons CDN -->
+    <script src="https://unpkg.com/@heroicons/vue@2.0.11/outline/index.umd.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+</head>
+<div layout:fragment="content">
+    <div class="max-w-3xl mx-auto mt-10">
+        <div class="bg-white p-8 rounded-2xl shadow-xl">
+            <h1 class="text-2xl font-bold mb-6 text-center text-indigo-600">
+                <i class="fa-solid fa-user-pen mr-2 text-indigo-500"></i> Cập nhật khách hàng
+            </h1>
+            <form th:action="@{/customers/save}" method="post" th:object="${customer}" class="space-y-5">
+                <input type="hidden" th:field="*{id}" />
+
+                <div>
+                    <label class="block text-sm font-medium text-gray-700">Tên công ty</label>
+                    <input type="text" th:field="*{companyName}" class="w-full mt-1 p-2 border border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500 shadow-sm">
+                </div>
+
+                <div>
+                    <label class="block text-sm font-medium text-gray-700">Địa chỉ</label>
+                    <input type="text" th:field="*{address}" class="w-full mt-1 p-2 border border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500 shadow-sm">
+                </div>
+
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700">Thành phố</label>
+                        <input type="text" th:field="*{city}" class="w-full mt-1 p-2 border border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500 shadow-sm">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700">Quốc gia</label>
+                        <input type="text" th:field="*{country}" class="w-full mt-1 p-2 border border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500 shadow-sm">
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700">Mã bưu điện</label>
+                        <input type="text" th:field="*{postalCode}" class="w-full mt-1 p-2 border border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500 shadow-sm">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700">Năm sinh</label>
+                        <input type="number" th:field="*{namSinh}" class="w-full mt-1 p-2 border border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500 shadow-sm">
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-sm font-medium text-gray-700">Khu vực</label>
+                    <input type="text" th:field="*{region}" class="w-full mt-1 p-2 border border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500 shadow-sm">
+                </div>
+
+                <div class="text-center">
+                    <button type="submit" class="mt-4 inline-flex items-center px-6 py-2 bg-indigo-600 text-white font-semibold rounded-md shadow hover:bg-indigo-700 transition">
+                        <i class="fa-solid fa-check mr-2"></i> Cập nhật
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

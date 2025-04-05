@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="vi" 
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/layout}">
+<head>
+    <title layout:title-content="Giới thiệu">Giới thiệu</title>
+</head>
+
+<section layout:fragment="content">
+    <section class="max-w-5xl mx-auto text-center">
+        <h1 class="text-4xl font-bold text-summer-gradient mb-6">Về chúng tôi</h1>
+        <p class="text-gray-700 text-lg leading-relaxed">
+            Retrip là nền tảng du lịch hàng đầu tại Việt Nam, giúp bạn dễ dàng tìm kiếm và đặt các tour du lịch chất lượng cao. 
+            Chúng tôi tin rằng mỗi chuyến đi đều mang một câu chuyện – và nhiệm vụ của chúng tôi là giúp bạn viết nên những kỷ niệm đáng nhớ.
+        </p>
+    </section>
+
+    <section class="mt-12 max-w-5xl mx-auto grid md:grid-cols-3 gap-6 text-center">
+        <div class="p-6 bg-white shadow-summer rounded-lg">
+            <i class="fas fa-map-marked-alt text-summer-blue text-4xl mb-4"></i>
+            <h3 class="text-xl font-semibold mb-2">Khám phá dễ dàng</h3>
+            <p class="text-gray-600">Hệ thống tìm kiếm thông minh giúp bạn chọn tour phù hợp chỉ trong vài cú click.</p>
+        </div>
+        <div class="p-6 bg-white shadow-summer rounded-lg">
+            <i class="fas fa-handshake text-summer-green text-4xl mb-4"></i>
+            <h3 class="text-xl font-semibold mb-2">Đối tác uy tín</h3>
+            <p class="text-gray-600">Chúng tôi hợp tác với các nhà cung cấp tour uy tín để đảm bảo chất lượng.</p>
+        </div>
+        <div class="p-6 bg-white shadow-summer rounded-lg">
+            <i class="fas fa-star text-summer-orange text-4xl mb-4"></i>
+            <h3 class="text-xl font-semibold mb-2">Trải nghiệm tuyệt vời</h3>
+            <p class="text-gray-600">Đem lại dịch vụ tận tâm, chu đáo từ lúc đặt tour đến khi bạn trở về.</p>
+        </div>
+    </section>
+
+    <section class="mt-16 max-w-5xl mx-auto text-center">
+        <h2 class="text-3xl font-bold text-summer-gradient mb-4">Đội ngũ của chúng tôi</h2>
+        <p class="text-gray-700 mb-8">
+            Retrip được xây dựng bởi những con người đam mê du lịch, công nghệ và sự sáng tạo. Chúng tôi luôn hướng đến việc 
+            mang lại giá trị thật cho cộng đồng người yêu du lịch.
+        </p>
+
+        <div class="grid md:grid-cols-3 gap-6">
+            <div class="bg-white p-4 rounded-lg shadow-summer">
+                <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="CEO" class="w-24 h-24 rounded-full mx-auto mb-3">
+                <h4 class="text-lg font-bold">Nguyễn Thảo</h4>
+                <p class="text-sm text-gray-500">CEO & Co-Founder</p>
+            </div>
+            <div class="bg-white p-4 rounded-lg shadow-summer">
+                <img src="https://randomuser.me/api/portraits/men/45.jpg" alt="CTO" class="w-24 h-24 rounded-full mx-auto mb-3">
+                <h4 class="text-lg font-bold">Lê Hoàng</h4>
+                <p class="text-sm text-gray-500">CTO - Kỹ thuật</p>
+            </div>
+            <div class="bg-white p-4 rounded-lg shadow-summer">
+                <img src="https://randomuser.me/api/portraits/women/46.jpg" alt="CMO" class="w-24 h-24 rounded-full mx-auto mb-3">
+                <h4 class="text-lg font-bold">Phạm Minh Châu</h4>
+                <p class="text-sm text-gray-500">CMO - Marketing</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="mt-16 bg-summer-blue/5 py-12">
+        <div class="max-w-4xl mx-auto text-center">
+            <h2 class="text-2xl font-semibold text-summer-gradient mb-4">Vì sao chọn Retrip?</h2>
+            <ul class="list-disc list-inside text-left text-gray-700 max-w-2xl mx-auto">
+                <li>Giao diện thân thiện, dễ sử dụng</li>
+                <li>Hàng trăm tour du lịch khắp mọi miền đất nước</li>
+                <li>Đánh giá và phản hồi thực tế từ người dùng</li>
+                <li>Thanh toán linh hoạt, bảo mật cao</li>
+                <li>Chăm sóc khách hàng 24/7</li>
+            </ul>
+        </div>
+    </section>
+
+    <section class="mt-16 text-center">
+        <h2 class="text-2xl font-bold text-summer-gradient mb-4">Bạn đã sẵn sàng khám phá?</h2>
+        <a href="/tours" class="inline-block mt-4 px-6 py-3 bg-primary text-white rounded-lg shadow-glow hover:shadow-glow-hover transition">
+            Khám phá Tour ngay
+        </a>
+    </section>
+</section>
+</html>

@@ -1,0 +1,494 @@
+:root {
+    --orange: #F5A623;
+    --teal: #26A69A;
+    --light-blue: #E0F7FA;
+    --dark-green: #2E7D32;
+    --white: #FFFFFF;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Arial', sans-serif;
+}
+
+
+body {
+    overflow-x: hidden;
+    font-family: 'Poppins', sans-serif;
+    background-color: var(--white);
+}
+.title {
+    max-width: 300px;
+}
+.highlight-orange { color: #F7931E; }
+.highlight-teal { color: #00A99D; 
+}
+
+/* Background shapes - common */
+.bg {
+    position: absolute;
+    z-index: -1;
+    pointer-events: none;
+    }
+
+    /* ==== TOP-RIGHT CORNER ==== */
+    .top-right.wave {
+    top: 0;
+    right: 0;
+    width: 200px;
+    }
+
+    .top-right.leaf {
+        top: -44px;
+        right: 33px;
+        width: 100px;
+    }
+    
+    .top-right.leaf1 {
+        top: -25px;
+        right: -45px;
+        width: 100px;
+    }
+
+    .top-right.hill {
+    top: 0;
+    right: 0;
+    width: 250px;
+    }
+/* ==== TOP-CENTER ==== */
+.top-center.line {
+    top: -60px;
+    left: 15%;
+    width: 50%;
+ /* Giảm chiều rộng để phù hợp với độ dài đường kẻ trong ảnh */
+}
+
+.top-center.plane {
+    top: 65px;
+    left: 67%;
+    transform: translateX(-50%);
+    width: 35px;
+}
+
+    /* ==== BOTTOM-RIGHT ==== */
+.bottom-right.wave {
+bottom: 0;
+right: 0;
+width: 270px;
+z-index: -3;
+}
+
+.bottom-right.leaf1 {
+    bottom: -33px;
+    right: 20px;
+    width: 100px;
+}
+
+.bottom-right.hill {
+    bottom: -47px;
+    right: -75px;
+    width: 567px;
+    height: 325px;
+    z-index: -2;
+}
+
+.bottom-right.leaf {
+    bottom: 0px;
+    right: -30px;
+    width: 85px;
+}
+
+    /* ==== BOTTOM-LEFT ==== */
+    .bottom-left.wave {
+    bottom: 0;
+    left: 0;
+    width:175px;
+    }
+
+    .bottom-left.hill {
+        bottom: 0;
+        left: -15px;
+        width: 115px;
+    }
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    position: relative;
+    overflow: hidden;
+    z-index: 2;
+}
+
+/* Header Styles */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 0;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+}
+
+.logo img:nth-of-type(1) {
+    width: 60px; /* Adjusted logo size */
+    height: 65px; /* Adjusted logo size */
+    border-radius: 3px;
+}
+
+.logo img:nth-of-type(2) {
+    width: 120px; /* Adjusted title logo size */
+    height: 43px; /* Adjusted title logo size */
+    border-radius: 14px;
+    margin-left: 10px; /* Added spacing between logo and title */
+}
+
+.account-links {
+    display: flex;
+    align-items: center;
+}
+
+.account-text {
+    font-size: 18px; /* Adjusted font size */
+    line-height: normal; /* Adjusted line height */
+    color: #202731;
+    font-weight: 500;
+    font-family: "Poppins";
+    margin-right: 10px; /* Added spacing between text and icon */
+}
+
+.account-links img {
+    width: 80px; /* Adjusted icon size */
+    height: 30px; /* Adjusted icon size */
+    border-radius: 5px;
+}
+
+/* Main Content Styles */
+.main-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0;
+    position: relative;
+    overflow: hidden;
+}
+
+.content-left {
+    width: 50%;
+    padding-top: 15px;
+}
+
+.main-heading {
+    font-size: 35px; /* Adjusted font size */
+    line-height: 1;
+    color: #e2963b;
+    font-weight: 400;
+    font-family: "Orelega One";
+}
+
+.heading-first {
+    color: var(--orange);
+}
+
+.heading-second {
+    color: var(--teal);
+}
+
+.quote {
+    display: flex;
+    gap: 5px;
+    align-items: center;
+    font-style: italic;
+    margin-bottom: 5.5rem;
+    margin-left: 100px;
+    color: #333;
+    margin-top: 20px;
+    max-width: 351px;
+    font-weight: 700;
+    font-style: italic;
+    font-family: "Raleway";
+    position: relative;
+    display: inline-block;
+  }
+  .quote::before {
+    content: "“";
+    color: #558fa1;
+    font-weight: 400;
+    font-family: "Orelega One", serif;
+    font-size: 2em;
+    position: absolute;
+    left: -35px; /* điều chỉnh vị trí sát chữ */
+    top: -5px;      /* canh đỉnh cùng dòng */
+  }
+.register-btn {
+    display: inline-block;
+    background-color: var(--orange);
+    color: var(--white);
+    padding: 10px 40px; /* Adjusted padding */
+    border-radius: 20px; /* Adjusted border radius */
+    text-decoration: none;
+    margin-top: 20px;
+    transition: all 0.3s ease;
+    font-size: 16px; /* Adjusted font size */
+    font-weight: 400;
+    font-family: "Orelega One";
+}
+
+.register-btn:hover {
+    background-color: #e69100;
+    transform: translateY(-3px);
+}
+
+.website-link {
+    display: inline-block;
+    padding: 10px 40px;
+    margin-top: 20px;
+    margin-left: 20px;
+    font-size: 16px; /* Adjusted font size */
+    color: var(--white);
+    font-weight: 700;
+    font-family: "Raleway";
+    transition: all 0.3s ease;
+    border-radius: 25px;
+    background-color: #e69100;
+    text-decoration: none;
+}
+
+.website-link:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.content-right {
+    width: 50%;
+    position: relative;
+    padding-bottom: 52px;
+}
+
+/* Adjust vertical text positioning */
+.content-right .vertical-text {
+    position: absolute;
+    right: -20px;
+    top: -85px;
+    transform: translateY(-50%) rotate(90deg);
+    color: #e2963b;
+    font-size: 20px; /* Reduced from 20px */
+    white-space: nowrap;
+    font-weight: 400;
+    font-family: "Orelega One";
+}
+
+.content-right .vertical-text1 {
+    position: absolute;
+    top: 55px; /* Adjusted from 65% */
+    right: -20px;
+    transform: translateY(-50%) rotate(-90deg);
+    color: #e2963b;;
+    font-size: 20px; /* Reduced from 20px */
+    white-space: nowrap;
+    font-weight: 400;
+    font-family: "Orelega One";
+}
+
+/* Adjust the footer section */
+.footer-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-top: 40px;
+    position: relative;
+}
+
+/* Update the live streaming section */
+.live-streaming {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    color: #202731;
+    font-weight: 600;
+    font-family: "Poppins";
+    text-align: right;
+    position: absolute;
+    bottom: -195px;
+    left: 80px;
+}
+
+/* Make sure the featured image doesn't overflow */
+.featured-image {
+    width: 70%;
+    top: -185px;
+    right: 60px;
+    border-radius: 10px;
+    position: absolute;
+}
+.featured-image-line{
+    width: 70%;
+    border-radius: 10px;
+    top: -170px;
+    left: 90px;
+    opacity: 100%;
+    position: absolute;
+    pointer-events: none; /* Allows clicks to pass through to the image below */
+}
+
+/* Gallery Section */
+.gallery {
+    display: flex;
+    justify-content: space-between;
+    margin: 30px 0; /* Adjusted margin */
+}
+
+.gallery-item {
+    width: 32%;
+    border-radius: 5px; /* Adjusted border radius */
+    overflow: hidden;
+}
+
+.gallery-item img {
+    width: 75%;
+    height: auto;
+    transition: transform 0.3s ease;
+    margin-top: 20px;
+}
+
+.gallery-item img:hover {
+    transform: scale(1.05);
+}
+
+.streaming-text p:first-child {
+    font-size: 16px; /* Adjusted font size */
+    margin-bottom: 5px; /* Added margin */
+}
+
+.streaming-text p:last-child {
+    font-size: 14px; /* Adjusted font size */
+}
+
+.streaming-icon {
+    width: 35px;
+    height: 25px;
+    padding-top: 5px;
+}
+
+.date-box {
+    position: absolute;
+    right: 75px;
+    bottom: -220px;
+    background-color: #567c5e;
+    padding: 15px 25px; /* Reduced padding */
+    border-radius: 35px;
+    width: 240px; /* Reduced width */
+    text-align: center;
+    z-index: 10; /* Ensure it stays above other elements */
+}
+
+/* Update the featured image container */
+.featured-image-container {
+    position: relative; /* Changed from absolute */
+    margin-bottom: 10px;
+    padding-right: 20px;
+}
+
+.date-number {
+    font-size: 36px;
+    color: var(--white); /* Added text color */
+    font-weight: 400;
+    font-family: "Orelega One";
+}
+
+.date-info {
+    font-size: 16px; /* Adjusted font size */
+    line-height: normal; /* Adjusted line height */
+    color: #ffffff;
+    font-weight: 700;
+    font-family: "Poppins";
+}
+/* Responsive Styles */
+@media (max-width: 992px) {
+    .main-section {
+        flex-direction: column;
+    }
+
+    .content-left, .content-right {
+        width: 100%;
+    }
+
+    .content-right {
+        margin-top: 30px;
+    }
+
+    .main-heading {
+        font-size: 30px; /* Adjusted font size */
+    }
+
+    header {
+        flex-direction: column; /* Stack header elements on smaller screens */
+        align-items: flex-start; /* Align items to the start */
+    }
+
+    .logo {
+        margin-bottom: 15px; /* Add some space below the logo */
+    }
+
+    .account-links {
+        margin-top: 10px; /* Add some space above the account links */
+    }
+}
+
+@media (max-width: 768px) {
+    .gallery {
+        flex-wrap: wrap;
+    }
+
+    .gallery-item {
+        width: 48%;
+        margin-bottom: 15px; /* Adjusted margin */
+    }
+
+    .footer-section {
+        flex-direction: column;
+        align-items: center; /* Center footer items */
+    }
+
+    .live-streaming {
+        margin-bottom: 20px; /* Adjusted margin */
+        text-align: center; /* Center text */
+    }
+
+    .streaming-text {
+        text-align: center; /* Center text */
+        margin-right: 0; /* Remove right margin */
+        margin-bottom: 5px; /* Add bottom margin */
+    }
+    .main-section {
+        flex-direction: column;
+    }
+    .content-left, .content-right {
+        width: 100%;
+        text-align: center;
+    }
+    .gallery {
+        flex-direction: column;
+        gap: 20px;
+    }
+}
+
+@media (max-width: 576px) {
+    .gallery-item {
+        width: 100%;
+    }
+
+    .main-heading {
+        font-size: 24px; /* Adjusted font size */
+    }
+
+    .account-text {
+        font-size: 16px; /* Further adjusted font size */
+    }
+}

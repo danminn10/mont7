@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/layout}">
+
+<head>
+  <meta charset="UTF-8">
+  <title layout:title-content="Thống kê Dashboard">Dashboard</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script th:src="@{/js/dashboard-data.js}" defer></script>
+</head>
+
+<div layout:fragment="content">
+  <div class="p-6">
+    <h1 class="text-3xl font-bold mb-6" th:text="${pageTitle}">Dashboard</h1>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-10">
+      <div class="bg-white p-6 rounded-2xl shadow flex space-x-4 items-center">
+        <div class="text-blue-500 text-2xl"><i class="fas fa-users"></i></div>
+        <div>
+          <h2 class="text-sm text-gray-600">Users</h2>
+          <p class="text-2xl font-bold text-blue-600" th:text="${userCount}">0</p>
+        </div>
+      </div>
+
+      <div class="bg-white p-6 rounded-2xl shadow flex space-x-4 items-center">
+        <div class="text-green-500 text-2xl"><i class="fas fa-money-bill-wave"></i></div>
+        <div>
+          <h2 class="text-sm text-gray-600">Monthly Sales</h2>
+          <p class="text-2xl font-bold text-green-600" th:text="${#numbers.formatDecimal(monthlySales, 0, 'COMMA', 0, 'POINT') + ' ₫'}">0₫</p>
+        </div>
+      </div>
+
+      <div class="bg-white p-6 rounded-2xl shadow flex space-x-4 items-center">
+        <div class="text-yellow-500 text-2xl"><i class="fas fa-receipt"></i></div>
+        <div>
+          <h2 class="text-sm text-gray-600">Orders</h2>
+          <p class="text-2xl font-bold text-yellow-600" th:text="${orderCount}">0</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+      <div class="bg-white p-6 rounded-2xl shadow">
+        <h2 class="text-xl font-semibold mb-4">Revenue Overview</h2>
+        <canvas id="revenueChart"></canvas>
+      </div>
+
+      <div class="bg-white p-6 rounded-2xl shadow">
+        <h2 class="text-xl font-semibold mb-4">User Types</h2>
+        <canvas id="userTypeChart"></canvas>
+      </div>
+
+      <div class="bg-white p-6 rounded-2xl shadow col-span-2">
+        <h2 class="text-xl font-semibold mb-4">Manager Stats</h2>
+        <canvas id="managerChart"></canvas>
+      </div>
+    </div>
+  </div>
+
+  <!-- Thymeleaf script section -->
+  <script th:inline="javascript">
+    window.dashboardData = {
+      revenueLabels: [[${revenueLabels}]],
+      revenueData: [[${revenueData}]],
+      userTypes: [[${userTypes}]],
+      managerStats: [[${managerStats}]]
+    };
+  </script>
+</div>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/layout}">
+<head>
+    <title>Danh sách Test</title>
+</head>
+<body>
+<section layout:fragment="content">
+    <div class="text-2xl font-semibold mb-4">Danh sách Test</div>
+    <table class="min-w-full bg-white shadow-md rounded-lg overflow-hidden">
+        <thead>
+        <tr class="bg-gray-200 text-gray-600 uppercase text-sm leading-normal">
+            <th class="py-3 px-6 text-left">ID</th>
+            <th class="py-3 px-6 text-left">Tên</th>
+        </tr>
+        </thead>
+        <tbody class="text-gray-700 text-sm font-light">
+        <tr th:each="test : ${tests}" class="border-b border-gray-200 hover:bg-gray-100">
+            <td class="py-3 px-6" th:text="${test.id}">1</td>
+            <td class="py-3 px-6" th:text="${test.name}">Test name</td>
+        </tr>
+        </tbody>
+    </table>
+</section>
+</body>
+</html>

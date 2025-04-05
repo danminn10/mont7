@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="vi" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/layout}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title layout:title-content="Chi Tiết Tour">Chi Tiết Tour | Retrip</title>
+</head>
+
+<section layout:fragment="content">
+    <!-- Decorative elements -->
+    <div class="absolute top-0 right-0 w-64 h-64 bg-primary/5 rounded-full mix-blend-multiply filter blur-3xl opacity-70 animate-blob"></div>
+    <div class="absolute top-1/3 left-0 w-72 h-72 bg-secondary/5 rounded-full mix-blend-multiply filter blur-3xl opacity-70 animate-blob animation-delay-2000"></div>
+    <div class="absolute bottom-0 right-1/3 w-80 h-80 bg-primary/10 rounded-full mix-blend-multiply filter blur-3xl opacity-70 animate-blob animation-delay-4000"></div>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-6 py-10 relative z-10">
+        <!-- Back button -->
+        <div class="mb-8">
+            <a th:href="@{/products}" class="inline-flex items-center text-dark hover:text-primary transition">
+                <i class="fas fa-arrow-left mr-2"></i> Quay lại danh sách tour
+            </a>
+        </div>
+
+        <!-- Tour Details -->
+        <div class="bg-white rounded-3xl shadow-2xl overflow-hidden">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-0">
+                <!-- Image -->
+                <div class="relative">
+                    <div class="absolute top-6 left-6 z-10">
+                        <span class="bg-primary text-white px-3 py-1 rounded-full text-sm font-medium shadow-md">BÁN CHẠY</span>
+                    </div>
+                    <img th:if="${tour.imageUrl}" th:src="@{${tour.imageUrl}}" alt="Ảnh tour" class="w-full h-full object-cover animate-float">
+                </div>
+
+                <!-- Info -->
+                <div class="p-8 lg:p-12">
+                    <div class="flex justify-between items-start mb-6">
+                        <div>
+                            <h1 class="text-4xl font-bold text-dark mb-2" th:text="${tour.name}">Tên Tour</h1>
+                            <div class="flex items-center space-x-2">
+                                <div class="flex text-yellow-400">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star-half-alt"></i>
+                                </div>
+                                <span class="text-gray-500">(124 đánh giá)</span>
+                            </div>
+                        </div>
+                        <div class="text-right">
+                            <p class="text-sm text-gray-500">Giá từ</p>
+                            <p class="text-3xl font-bold text-gradient" th:text="${#numbers.formatDecimal(tour.price, 0, 'COMMA', 0, 'POINT') + '₫'}">9.999.000₫</p>
+                        </div>
+                    </div>
+
+                    <div class="mb-8">
+                        <p class="text-gray-700 leading-relaxed mb-6" th:text="${tour.description}">Mô tả chi tiết về tour du lịch...</p>
+
+                        <div class="grid grid-cols-2 gap-4 mb-8">
+                            <div class="flex items-center">
+                                <div class="bg-primary/10 p-3 rounded-full mr-3"><i class="fas fa-calendar text-primary"></i></div>
+                                <div>
+                                    <p class="text-sm text-gray-500">Thời gian</p>
+                                    <p class="font-medium" th:text="${tour.duration + ' ngày'}">7 Ngày</p>
+                                </div>
+                            </div>
+                            <div class="flex items-center">
+                                <div class="bg-secondary/10 p-3 rounded-full mr-3"><i class="fas fa-users text-secondary"></i></div>
+                                <div>
+                                    <p class="text-sm text-gray-500">Số lượng</p>
+                                    <p class="font-medium">12 Người</p>
+                                </div>
+                            </div>
+                            <div class="flex items-center">
+                                <div class="bg-primary/10 p-3 rounded-full mr-3"><i class="fas fa-map-marker-alt text-primary"></i></div>
+                                <div>
+                                    <p class="text-sm text-gray-500">Địa điểm</p>
+                                    <p class="font-medium">Đà Nẵng, Việt Nam</p>
+                                </div>
+                            </div>
+                            <div class="flex items-center">
+                                <div class="bg-secondary/10 p-3 rounded-full mr-3"><i class="fas fa-clock text-secondary"></i></div>
+                                <div>
+                                    <p class="text-sm text-gray-500">Loại tour</p>
+                                    <p class="font-medium">Khám phá</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="pt-6 border-t border-gray-200">
+                        <a th:href="@{/booking/confirm/{id}(id=${tour.id})}"
+                           class="block w-full bg-gradient text-white text-center py-4 px-6 rounded-xl font-bold shadow-lg hover:shadow-glow-hover transition-all transform hover:-translate-y-1">
+                            <i class="fas fa-paper-plane mr-2"></i> ĐẶT TOUR NGAY
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Itinerary + Highlights -->
+        <div class="mt-16 grid grid-cols-1 lg:grid-cols-3 gap-8">
+            <!-- Lịch trình -->
+            <div class="bg-white rounded-2xl shadow-xl p-6 lg:col-span-2">
+                <h2 class="text-2xl font-bold text-dark mb-6 flex items-center">
+                    <span class="w-2 h-6 bg-primary rounded-full mr-3"></span> Lịch trình tour
+                </h2>
+
+                <div class="space-y-6">
+                    <!-- Ngày 1 -->
+                    <div class="flex">
+                        <div class="flex flex-col items-center mr-4">
+                            <div class="w-8 h-8 bg-primary rounded-full text-white flex items-center justify-center">1</div>
+                            <div class="w-0.5 h-full bg-gray-200 mt-2"></div>
+                        </div>
+                        <div>
+                            <h3 class="font-bold text-lg text-dark">Ngày 1: Khám phá thành phố Đà Nẵng</h3>
+                            <p class="text-gray-600 mt-2">Đón khách tại sân bay/khách sạn. Tham quan Cầu Rồng, Cầu Tình Yêu, và Bảo tàng Chăm...</p>
+                        </div>
+                    </div>
+
+                    <!-- Ngày 2 -->
+                    <div class="flex">
+                        <div class="flex flex-col items-center mr-4">
+                            <div class="w-8 h-8 bg-secondary rounded-full text-white flex items-center justify-center">2</div>
+                            <div class="w-0.5 h-full bg-gray-200 mt-2"></div>
+                        </div>
+                        <div>
+                            <h3 class="font-bold text-lg text-dark">Ngày 2: Bà Nà Hills – Cầu Vàng</h3>
+                            <p class="text-gray-600 mt-2">Di chuyển đến Bà Nà Hills, tham quan Cầu Vàng nổi tiếng, Làng Pháp, Hầm rượu Debay...</p>
+                        </div>
+                    </div>
+
+                    <!-- Ngày 3 -->
+                    <div class="flex">
+                        <div class="flex flex-col items-center mr-4">
+                            <div class="w-8 h-8 bg-primary rounded-full text-white flex items-center justify-center">3</div>
+                        </div>
+                        <div>
+                            <h3 class="font-bold text-lg text-dark">Ngày 3: Biển Mỹ Khê – Chợ Hàn – Kết thúc</h3>
+                            <p class="text-gray-600 mt-2">Tắm biển Mỹ Khê buổi sáng. Tham quan, mua sắm tại Chợ Hàn. Trả khách tại sân bay.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Điểm nổi bật -->
+            <div class="bg-white rounded-2xl shadow-xl p-6">
+                <h2 class="text-2xl font-bold text-dark mb-6 flex items-center">
+                    <span class="w-2 h-6 bg-secondary rounded-full mr-3"></span> Điểm nổi bật
+                </h2>
+
+                <ul class="space-y-4">
+                    <li class="flex items-start">
+                        <div class="bg-primary/10 p-2 rounded-full mr-3"><i class="fas fa-check text-primary text-sm"></i></div>
+                        <span class="text-gray-700">Khám phá Cầu Vàng - biểu tượng mới của du lịch Việt Nam</span>
+                    </li>
+                    <li class="flex items-start">
+                        <div class="bg-primary/10 p-2 rounded-full mr-3"><i class="fas fa-check text-primary text-sm"></i></div>
+                        <span class="text-gray-700">Trải nghiệm cáp treo dài và cao nhất thế giới tại Bà Nà</span>
+                    </li>
+                    <li class="flex items-start">
+                        <div class="bg-primary/10 p-2 rounded-full mr-3"><i class="fas fa-check text-primary text-sm"></i></div>
+                        <span class="text-gray-700">Check-in các điểm sống ảo cực hot tại trung tâm Đà Nẵng</span>
+                    </li>
+                    <li class="flex items-start">
+                        <div class="bg-primary/10 p-2 rounded-full mr-3"><i class="fas fa-check text-primary text-sm"></i></div>
+                        <span class="text-gray-700">Ẩm thực miền Trung phong phú, hấp dẫn</span>
+                    </li>
+                    <li class="flex items-start">
+                        <div class="bg-primary/10 p-2 rounded-full mr-3"><i class="fas fa-check text-primary text-sm"></i></div>
+                        <span class="text-gray-700">Hỗ trợ khách hàng 24/7 trong suốt hành trình</span>
+                    </li>
+                </ul>
+
+                <div class="mt-8 bg-gray-50 rounded-xl p-4">
+                    <h3 class="font-bold text-dark mb-3">Cần hỗ trợ đặt tour?</h3>
+                    <p class="text-gray-600 text-sm mb-3">Liên hệ ngay để được tư vấn viên hỗ trợ chi tiết về lịch trình và đặt tour.</p>
+                    <a href="tel:+84987654321" class="flex items-center text-primary font-medium">
+                        <i class="fas fa-phone-alt mr-2"></i> +84 987 654 321
+                    </a>
+                </div>
+            </div>
+        </div>
+    </main>
+</section>
+</html>

@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Retrip - Treat yourself with something better</title>
+
+    <!-- You can add font awesome or other icon libraries here -->
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orelega+One&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+
+    <!-- Vertical text on sides -->
+    
+    <div class="container">
+            <!-- Background shapes -->
+    <img class="bg top-right hill" th:src="@{/assests/background/brTopRight.png}" alt="">
+    <img class="bg top-right wave" th:src="@{/assests/background/brTwoBlueLine.png}" alt="">
+    <img class="bg top-right leaf1" th:src="@{assests/background/brLeaf1.png}" alt="">
+    <img class="bg top-right leaf" th:src="@{/assests/background/brLeaf.png}" alt="">
+    <img class="bg top-center line" th:src="@{/assests/background/orangeLine.png}" alt="">
+    <img class="bg top-center plane" th:src="@{/assests/background/orangePlane.png}" alt="">
+
+    <img class="bg bottom-right wave" th:src="@{/assests/background/brBottomRight.png}" alt="">
+    <img class="bg bottom-right leaf1" th:src="@{/assests/background/Shape.png}" alt="">
+    <img class="bg bottom-right hill" th:src="@{/assests/background/brThreeLineBlue.png}" alt="">
+    <img class="bg bottom-right leaf" th:src="@{/assests/background/shape1.png}" alt="">
+
+    <img class="bg bottom-left wave" th:src="@{/assests/background/brBottomLeft.png}" alt="">
+    <img class="bg bottom-left hill" th:src="@{/assests/background/brTwoStraightPointingDown.png}" alt="">
+        <!-- Header -->
+        <header>
+            <div class="logo">
+                <img th:src="@{/assests/logo/logo.svg}" alt="" srcset="">
+                <img th:src="@{/assests/logo/titleLogo.svg}" alt="" srcset="">
+            </div>
+            
+            <div class="account-links">
+                <span class="account-text">Your Account</span>
+                <img th:src="@{/assests/logo/logoMedia.svg}" alt="" srcset="">
+            </div>
+        </header>
+        
+        <!-- Main Section -->
+        <div class="main-section">
+            <!-- Left Content -->
+            <div class="content-left">
+                <h1 class="title"><span class="highlight-orange">Treat yourself</span> <span class="highlight-teal">with something better</span></h1>
+                <p class="quote">This holiday season may reflect good things upon you. May this year bring you lots of happiness, success and fun. Have a great holiday ahead.</p>
+            
+                <a href="#" onclick="return showRegisterAlert();" class="register-btn">Register Now</a>
+            
+                 <!-- Chỉnh sửa link xem sản phẩm -->
+                <a th:href="@{/products}" class="website-link">
+                    Xem tất cả gói du lịch
+                </a>
+                <div class="gallery">
+                    <!-- Replace with your actual gallery images -->
+                    <div class="gallery-item">
+                        <img th:src="@{/assests/img/img2.png}" alt="Woman with backpack at beach">
+                    </div>
+                    <div class="gallery-item">
+                        <img th:src="@{/assests/img/img3.png}" alt="Woman in yellow sweater from behind">
+                    </div>
+                    <div class="gallery-item">
+                        <img th:src="@{/assests/img/img4.png}" alt="Woman in yellow sweater sitting">
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Right Content -->
+            <div class="content-right">
+                <div class="featured-image-container">
+                    <!-- Replace with your actual featured image -->
+                    <img th:src="@{/assests/img/img1.png}" alt="Woman in yellow sweater by beach" class="featured-image">
+                    <img th:src="@{/assests/background/line.png}" alt="Woman in yellow sweater by beach" class="featured-image-line">
+                    <div class="vertical-text">#treatyourself</div> 
+                    <div class="vertical-text1">#safetyholiday</div> 
+
+                </div>
+                <div class="footer-section">
+                    <div class="live-streaming">
+                        <div class="streaming-text">
+                            <p>Live Streaming</p>
+                            <p>On Your Channel</p>
+                        </div>
+                        <img class="streaming-icon" th:src="@{/assests/logo/logoYTB.png}" alt="YouTube logo">
+                    </div>
+                    
+                    <div class="date-box">
+                        <p class="date-number">28th</p>
+                        <p class="date-info">February 2021</p>
+                    </div>
+                </div>
+            </div>
+        </div>     
+    </div>
+    <!-- Khi cần hiển thị sản phẩm
+    <div th:replace="~{fragments/product-card :: product-card(${product})}" 
+    th:each="product : ${featuredProducts}"></div> -->
+    <script>
+        function showRegisterAlert() {
+            alert("Xin lỗi, tính năng đăng ký hiện chưa khả dụng. Vui lòng quay lại sau!");
+            return false;
+        }
+    </script>
+</body>
+</html> 

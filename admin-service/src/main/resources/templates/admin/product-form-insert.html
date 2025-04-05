@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/layout}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thêm Sản Phẩm Tour</title>
+
+    <style>
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .animate-fade-in {
+            animation: fadeIn 0.5s ease-out;
+        }
+        .input-highlight:focus {
+            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.3);
+            border-color: #6366f1;
+        }
+    </style>
+</head>
+<div layout:fragment="content">
+    <div class="container mx-auto px-4 py-8 animate-fade-in">
+        <div class="max-w-2xl mx-auto bg-white rounded-xl shadow-lg overflow-hidden">
+            <!-- Header -->
+            <div class="bg-gradient-to-r from-blue-600 to-blue-500 p-6 text-white">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <h2 class="text-2xl font-bold">
+                            <i class="fas fa-plus-circle mr-2"></i> Thêm Sản Phẩm Tour
+                        </h2>
+                        <p class="text-blue-100 mt-1">Nhập thông tin tour du lịch mới</p>
+                    </div>
+                    <div class="bg-white/20 p-3 rounded-full">
+                        <i class="fas fa-route text-xl"></i>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Form -->
+            <div class="p-6 space-y-6">
+                <form th:action="@{/products/save}" method="post" th:object="${product}" class="space-y-5">
+                    <!-- Tên sản phẩm -->
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">
+                            Tên tour <span class="text-red-500">*</span>
+                        </label>
+                        <div class="relative">
+                            <input type="text" th:field="*{name}" 
+                                   class="w-full px-4 py-2 border border-gray-300 rounded-lg input-highlight focus:outline-none focus:ring-1 focus:ring-blue-500"
+                                   placeholder="Ví dụ: Tour Đà Nẵng 3 ngày 2 đêm">
+                            <div class="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
+                                <i class="fas fa-signature text-gray-400"></i>
+                            </div>
+                        </div>
+                        <p th:if="${#fields.hasErrors('name')}" th:errors="*{name}" 
+                           class="text-red-500 text-sm mt-1 flex items-center">
+                            <i class="fas fa-exclamation-circle mr-1"></i> <span th:utext="${#strings.replace(th:errors, '\n', '<br>')}"></span>
+                        </p>
+                    </div>
+
+                    <!-- Giá và Thời lượng -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                        <!-- Giá -->
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">
+                                Giá tour (VND) <span class="text-red-500">*</span>
+                            </label>
+                            <div class="relative">
+                                <input type="number" step="0.01" th:field="*{price}" 
+                                       class="w-full px-4 py-2 border border-gray-300 rounded-lg input-highlight focus:outline-none focus:ring-1 focus:ring-blue-500"
+                                       placeholder="Ví dụ: 2990000">
+                                <div class="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
+                                    <i class="fas fa-money-bill-wave text-gray-400"></i>
+                                </div>
+                            </div>
+                            <p th:if="${#fields.hasErrors('price')}" th:errors="*{price}" 
+                               class="text-red-500 text-sm mt-1 flex items-center">
+                                <i class="fas fa-exclamation-circle mr-1"></i> <span th:utext="${#strings.replace(th:errors, '\n', '<br>')}"></span>
+                            </p>
+                        </div>
+
+                        <!-- Thời lượng -->
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">
+                                Thời lượng (ngày) <span class="text-red-500">*</span>
+                            </label>
+                            <div class="relative">
+                                <input type="number" th:field="*{duration}" 
+                                       class="w-full px-4 py-2 border border-gray-300 rounded-lg input-highlight focus:outline-none focus:ring-1 focus:ring-blue-500"
+                                       placeholder="Ví dụ: 3">
+                                <div class="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
+                                    <i class="fas fa-calendar-day text-gray-400"></i>
+                                </div>
+                            </div>
+                            <p th:if="${#fields.hasErrors('duration')}" th:errors="*{duration}" 
+                               class="text-red-500 text-sm mt-1 flex items-center">
+                                <i class="fas fa-exclamation-circle mr-1"></i> <span th:utext="${#strings.replace(th:errors, '\n', '<br>')}"></span>
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Mô tả -->
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">
+                            Mô tả tour
+                        </label>
+                        <textarea th:field="*{description}" rows="4"
+                                  class="w-full px-4 py-2 border border-gray-300 rounded-lg input-highlight focus:outline-none focus:ring-1 focus:ring-blue-500"
+                                  placeholder="Mô tả chi tiết về tour..."></textarea>
+                    </div>
+
+                    <!-- Ảnh -->
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">
+                            Đường dẫn ảnh
+                        </label>
+                        <div class="relative">
+                            <input type="text" th:field="*{imageUrl}" 
+                                   class="w-full px-4 py-2 border border-gray-300 rounded-lg input-highlight focus:outline-none focus:ring-1 focus:ring-blue-500"
+                                   placeholder="https://example.com/image.jpg">
+                            <div class="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
+                                <i class="fas fa-image text-gray-400"></i>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Nút submit -->
+                    <div class="pt-4">
+                        <button type="submit"
+                                class="w-full bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white font-medium py-2 px-4 rounded-lg transition duration-200 shadow-md">
+                            <i class="fas fa-save mr-2"></i> Lưu Sản Phẩm
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+</html>

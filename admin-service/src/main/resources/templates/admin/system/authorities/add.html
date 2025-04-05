@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/layout}">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Thêm quyền</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Tailwind -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Flowbite + Alpine.js -->
+  <script src="https://unpkg.com/flowbite@1.6.5/dist/flowbite.min.js"></script>
+  <script src="https://unpkg.com/alpinejs" defer></script>
+
+  <!-- Tailwind config -->
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+    }
+  </script>
+
+  <style>
+    .fade-in {
+      animation: fadeIn 0.4s ease-in-out;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(15px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+
+<!-- Layout fragment content -->
+<div layout:fragment="content"
+     class="bg-gray-100 dark:bg-gray-900 min-h-screen flex items-center justify-center px-4"
+     x-data="{ showToast: false }">
+
+  <div class="w-full max-w-md bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-8 fade-in">
+    <!-- Header -->
+    <div class="flex justify-between items-center mb-6">
+      <h2 class="text-2xl font-bold text-green-600 dark:text-green-400">Thêm Quyền</h2>
+      <button onclick="document.documentElement.classList.toggle('dark')" class="text-sm text-gray-500 dark:text-gray-300 hover:underline">
+        🌗 Đổi nền
+      </button>
+    </div>
+
+    <!-- Form -->
+    <form th:action="@{/system/authorities/save}" method="post" th:object="${authority}" @submit="showToast = true" class="space-y-5">
+      <!-- Tên quyền -->
+      <div>
+        <label for="name" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Tên quyền</label>
+        <input type="text" th:field="*{name}" id="name"
+               class="w-full mt-1 px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-green-500 focus:outline-none">
+
+        <!-- Lỗi -->
+        <div th:if="${#fields.hasErrors('name')}" th:errors="*{name}" class="text-sm text-red-500 mt-1"></div>
+      </div>
+
+      <!-- Buttons -->
+      <div class="flex justify-between items-center pt-4">
+        <button type="submit"
+                class="bg-green-600 hover:bg-green-700 text-white font-medium py-2 px-6 rounded-md transition duration-200">
+          Lưu
+        </button>
+        <a th:href="@{/system/authorities/list}" class="text-sm text-gray-500 dark:text-gray-300 hover:underline">
+          Hủy
+        </a>
+      </div>
+    </form>
+  </div>
+
+  <!-- Toast -->
+  <div x-show="showToast" x-transition x-init="setTimeout(() => showToast = false, 3000)"
+       class="fixed bottom-6 right-6 bg-green-500 text-white px-4 py-3 rounded-lg shadow-lg text-sm flex items-center space-x-2">
+    <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/>
+    </svg>
+    <span>Thêm quyền thành công!</span>
+  </div>
+</div>

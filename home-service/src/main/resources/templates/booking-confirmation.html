@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="vi" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/layout}">
+<head>
+    <title layout:title-content="Xác nhận đặt tour">Xác nhận đặt tour | Retrip</title>
+</head>
+
+<section layout:fragment="content">
+    <!-- Breadcrumb -->
+    <div class="bg-gray-100 py-4">
+        <div class="container mx-auto px-4 md:px-6">
+            <nav class="flex" aria-label="Breadcrumb">
+                <ol class="inline-flex items-center space-x-2">
+                    <li>
+                        <a th:href="@{/}" class="text-gray-600 hover:text-primary">
+                            <i class="fas fa-home mr-1"></i> Trang chủ
+                        </a>
+                    </li>
+                    <li>
+                        <i class="fas fa-chevron-right text-gray-400 mx-2"></i>
+                    </li>
+                    <li>
+                        <a th:href="@{/tours}" class="text-gray-600 hover:text-primary">Danh sách tour</a>
+                    </li>
+                    <li>
+                        <i class="fas fa-chevron-right text-gray-400 mx-2"></i>
+                    </li>
+                    <li aria-current="page">
+                        <span class="text-primary font-medium">Xác nhận đặt tour</span>
+                    </li>
+                </ol>
+            </nav>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="container mx-auto px-4 md:px-6 py-8">
+        <div class="max-w-2xl mx-auto bg-white rounded-xl shadow-md overflow-hidden">
+            <div class="p-6 md:p-8 text-center">
+                <!-- Success Icon -->
+                <div class="confirmation-icon bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6">
+                    <i class="fas fa-check-circle text-green-500 text-5xl"></i>
+                </div>
+
+                <h1 class="text-2xl font-bold text-gray-900 mb-2">Đặt tour thành công!</h1>
+                <p class="text-gray-600 mb-6" th:if="${booking?.customerName}">
+                    Cảm ơn bạn <span class="font-medium" th:text="${booking.customerName}"></span> đã đặt tour với chúng tôi.
+                </p>
+
+                <!-- Booking Details -->
+                <div class="bg-gray-50 rounded-lg p-6 text-left mb-6" th:if="${booking}">
+                    <h2 class="text-xl font-bold text-gray-900 mb-4">Thông tin đặt tour</h2>
+
+                    <div class="space-y-3">
+                        <div class="booking-detail-item" th:if="${booking.id}">
+                            <p class="text-sm text-gray-500">Mã đặt tour</p>
+                            <p class="font-medium" th:text="${booking.id}"></p>
+                        </div>
+
+                        <div class="booking-detail-item" th:if="${booking.tour?.name}">
+                            <p class="text-sm text-gray-500">Tour</p>
+                            <p class="font-medium" th:text="${booking.tour.name}"></p>
+                        </div>
+
+                        <div class="booking-detail-item" th:if="${booking.numberOfPeople}">
+                            <p class="text-sm text-gray-500">Số người</p>
+                            <p class="font-medium" th:text="|${booking.numberOfPeople} người|"></p>
+                        </div>
+
+                        <div class="booking-detail-item" th:if="${booking.bookingDate}">
+                            <p class="text-sm text-gray-500">Ngày khởi hành</p>
+                            <p class="font-medium" th:text="${#temporals.format(booking.bookingDate, 'dd/MM/yyyy')}"></p>
+                        </div>
+
+                        <div class="booking-detail-item" th:if="${booking.tour?.price != null and booking.numberOfPeople != null}">
+                            <p class="text-sm text-gray-500">Tổng giá</p>
+                            <p class="font-medium text-primary"
+                               th:text="${#numbers.formatCurrency(booking.tour.price * booking.numberOfPeople)}"></p>
+                        </div>
+                    </div>
+                </div>
+
+                <p class="text-gray-600 mb-6">Chúng tôi sẽ liên hệ với bạn trong thời gian sớm nhất để xác nhận thông tin.</p>
+
+                <!-- Action Buttons -->
+                <div class="flex flex-col sm:flex-row gap-4">
+                    <a th:href="@{/products}"
+                       class="flex-1 bg-primary hover:bg-primary-dark text-white py-2 px-4 rounded-lg font-medium transition text-center">
+                        <i class="fas fa-list mr-2"></i> XEM TOUR KHÁC
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+</html>

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+        <footer th:class="${theme == 'summer'} ? 'bg-dark text-white py-12' : 'bg-dark text-white py-12 mt-20'" th:fragment="footer(theme)">
+            <div class="container mx-auto px-6">
+                <div th:class="${theme == 'summer'} ? 'grid grid-cols-1 md:grid-cols-4 gap-8' : 'grid grid-cols-1 md:grid-cols-2 gap-8'">
+                    <div>
+                        <div class="flex items-center space-x-2 mb-4">
+                            <div th:class="${theme == 'summer'} ? 
+                                'w-8 h-8 summer-badge rounded-full flex items-center justify-center text-white font-bold' : 
+                                'w-8 h-8 bg-primary rounded-full flex items-center justify-center text-white font-bold'">R</div>
+                            <span class="text-2xl font-bold text-white">RETRIP</span>
+                        </div>
+                        <p class="text-gray-400" th:text="${theme == 'summer'} ? 
+                            'Hành trình mùa hè của bạn bắt đầu từ đây' : 
+                            'Tạo ra những trải nghiệm du lịch khó quên từ năm 2020.'"></p>
+                        <th:block th:if="${theme == 'summer'}">
+                            <div class="flex space-x-4 mt-4">
+                                <a href="https://www.facebook.com/ng.dangminh0810" class="text-gray-400 hover:text-white transition"><i class="fab fa-facebook-f"></i></a>
+                                <a href="https://www.instagram.com/njr26650/" class="text-gray-400 hover:text-white transition"><i class="fab fa-instagram"></i></a>
+                                <a href="https://www.tiktok.com/@ng.minh9409" class="text-gray-400 hover:text-white transition"><i class="fab fa-tiktok"></i></a>
+                            </div>
+                        </th:block>
+                    </div>
+                    
+                    <th:block th:if="${theme == 'summer'}">
+                        <div>
+                            <h3 class="text-lg font-bold mb-4">Tour hè</h3>
+                            <ul class="space-y-2">
+                                <li><a href="https://www.saigontourist.net/vi/" class="text-gray-400 hover:text-white transition">Biển đảo</a></li>
+                                <li><a href="https://vietnam-travel.vn/" class="text-gray-400 hover:text-white transition">Miền núi</a></li>
+                            </ul>
+                        </div>
+                    </th:block>
+                    
+                    <div>
+                        <h3 class="text-lg font-bold mb-4">Hỗ trợ</h3>
+                        <ul class="space-y-2">
+                            <li><a href="#" class="text-gray-400 hover:text-white transition" th:text="${theme == 'summer'} ? 'Câu hỏi thường gặp' : 'Liên hệ'"></a></li>
+                            <li><a href="#" class="text-gray-400 hover:text-white transition" th:text="${theme == 'summer'} ? 'Chính sách đổi trả' : 'Câu hỏi thường gặp'"></a></li>
+                            <th:block th:if="${theme == 'summer'}">
+                                <li><a href="#" class="text-gray-400 hover:text-white transition">Liên hệ</a></li>
+                            </th:block>
+                        </ul>
+                    </div>
+                    
+                    <th:block th:if="${theme == 'summer'}">
+                        <div>
+                            <h3 class="text-lg font-bold mb-4">Đăng ký nhận ưu đãi</h3>
+                            <p class="text-gray-400 mb-4">Nhận thông tin tour hè với giá tốt nhất</p>
+                            <form class="flex">
+                                <input type="email" placeholder="Email của bạn" class="px-4 py-2 rounded-l-lg focus:outline-none text-dark w-full">
+                                <button type="submit" class="bg-summer-orange hover:bg-summer-orange/90 text-white px-4 py-2 rounded-r-lg transition">
+                                    <i class="fas fa-paper-plane"></i>
+                                </button>
+                            </form>
+                        </div>
+                    </th:block>
+                </div>
+                
+                <div class="border-t border-gray-800 mt-10 pt-6 text-center">
+                    <p class="text-gray-500 text-sm">© 2025 Retrip. <span th:text="${theme == 'summer'} ? 'Tất cả quyền được bảo lưu.' : 'Bảo lưu mọi quyền.'"></span></p>
+                </div>
+            </div>
+        </footer>
+</html>

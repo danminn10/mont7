@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="vi" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/layout}">
+<head>
+    <title layout:title-content="Đặt Tour">Đặt Tour | Retrip</title>
+</head>
+
+<section layout:fragment="content">
+    <!-- Breadcrumb -->
+    <div class="bg-gray-100 py-4">
+        <div class="container mx-auto px-6">
+            <nav class="flex" aria-label="Breadcrumb">
+                <ol class="inline-flex items-center space-x-2">
+                    <li>
+                        <a th:href="@{/}" class="text-gray-600 hover:text-primary">
+                            <i class="fas fa-home mr-1"></i> Trang chủ
+                        </a>
+                    </li>
+                    <li>
+                        <i class="fas fa-chevron-right text-gray-400 mx-2"></i>
+                    </li>
+                    <li>
+                        <a th:href="@{/products}" class="text-gray-600 hover:text-primary">Danh sách tour</a>
+                    </li>
+                    <li>
+                        <i class="fas fa-chevron-right text-gray-400 mx-2"></i>
+                    </li>
+                    <li aria-current="page">
+                        <span class="text-primary font-medium">Đặt tour</span>
+                    </li>
+                </ol>
+            </nav>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="container mx-auto px-6 py-8">
+        <div class="max-w-2xl mx-auto bg-white rounded-xl shadow-md overflow-hidden">
+            <div class="p-8">
+                <h1 class="text-2xl font-bold text-gray-900 mb-2">
+                    Đặt Tour: <span class="text-primary" th:text="${tour.name}"></span>
+                </h1>
+                <p class="text-gray-600 mb-6">Vui lòng điền đầy đủ thông tin để hoàn tất đặt tour</p>
+
+                <!-- Thông báo lỗi -->
+                <div th:if="${error}" class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-6">
+                    <span th:text="${error}"></span>
+                </div>
+
+                <form th:action="@{/booking/submit}" th:object="${booking}" method="post">
+                    <input type="hidden" th:field="*{tour.id}">
+
+                    <div class="space-y-4">
+                        <!-- Họ tên -->
+                        <div>
+                            <label for="customerName" class="block text-sm font-medium text-gray-700 mb-1">Họ và tên *</label>
+                            <input type="text" id="customerName" th:field="*{customerName}"
+                                   class="form-input w-full px-4 py-2 rounded-lg focus:outline-none">
+                            <div th:if="${#fields.hasErrors('customerName')}" class="error-message">
+                                Vui lòng nhập họ tên
+                            </div>
+                        </div>
+
+                        <!-- Email -->
+                        <div>
+                            <label for="customerEmail" class="block text-sm font-medium text-gray-700 mb-1">Email *</label>
+                            <input type="email" id="customerEmail" th:field="*{customerEmail}"
+                                   class="form-input w-full px-4 py-2 rounded-lg focus:outline-none">
+                            <div th:if="${#fields.hasErrors('customerEmail')}" class="error-message">
+                                Vui lòng nhập email hợp lệ
+                            </div>
+                        </div>
+
+                        <!-- Số điện thoại -->
+                        <div>
+                            <label for="customerPhone" class="block text-sm font-medium text-gray-700 mb-1">Số điện thoại *</label>
+                            <input type="tel" id="customerPhone" th:field="*{customerPhone}"
+                                   class="form-input w-full px-4 py-2 rounded-lg focus:outline-none">
+                            <div th:if="${#fields.hasErrors('customerPhone')}" class="error-message">
+                                Vui lòng nhập số điện thoại
+                            </div>
+                        </div>
+
+                        <!-- Số người -->
+                        <div>
+                            <label for="numberOfPeople" class="block text-sm font-medium text-gray-700 mb-1">Số lượng người *</label>
+                            <select id="numberOfPeople" th:field="*{numberOfPeople}"
+                                    class="form-input w-full px-4 py-2 rounded-lg focus:outline-none">
+                                <option value="" disabled selected>Chọn số lượng</option>
+                                <option th:each="i : ${#numbers.sequence(1, 12)}"
+                                        th:value="${i}"
+                                        th:text="${i} + ' người'"></option>
+                            </select>
+                        </div>
+
+                        <!-- Ngày đi -->
+                        <div>
+                            <label for="bookingDate" class="block text-sm font-medium text-gray-700 mb-1">Ngày khởi hành *</label>
+                            <input type="date" id="bookingDate" th:field="*{bookingDate}"
+                                   class="form-input w-full px-4 py-2 rounded-lg focus:outline-none">
+                            <div th:if="${#fields.hasErrors('bookingDate')}" class="error-message">
+                                Vui lòng chọn ngày khởi hành
+                            </div>
+                        </div>
+
+                        <!-- Ghi chú -->
+                        <div>
+                            <label for="specialRequest" class="block text-sm font-medium text-gray-700 mb-1">Yêu cầu đặc biệt</label>
+                            <textarea id="specialRequest" th:field="*{specialRequest}" rows="3"
+                                      class="form-input w-full px-4 py-2 rounded-lg focus:outline-none"
+                                      placeholder="Ví dụ: Yêu cầu phòng đơn, dị ứng thức ăn..."></textarea>
+                        </div>
+                    </div>
+
+                    <!-- Submit Button -->
+                    <div class="mt-8">
+                        <button type="submit"
+                                class="w-full bg-primary hover:bg-primary-dark text-white py-3 px-6 rounded-lg font-bold transition">
+                            XÁC NHẬN ĐẶT TOUR
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Script: Set min date -->
+    <script>
+        document.getElementById('bookingDate').min = new Date().toISOString().split('T')[0];
+    </script>
+</section>
+</html>

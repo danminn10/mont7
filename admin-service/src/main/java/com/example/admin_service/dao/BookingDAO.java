@@ -1,0 +1,13 @@
+package com.example.admin_service.dao;
+
+import com.example.admin_service.entity.Booking;
+import java.util.List;
+
+public interface BookingDAO {
+    List<Booking> findAll();
+    Booking findById(Long id);
+    Booking save(Booking booking);
+    void deleteById(Long id);
+    List<Booking> findByTourId(Long tourId);
+    long count();
+}
